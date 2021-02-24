@@ -15,18 +15,27 @@ public class ShipController {
     ShipRepository shipRepository;
 
     @GetMapping(value = "/ships")
+    // example queries localhost:8080/ships
     public ResponseEntity<List<Ship>> getAllShips(){
         return new ResponseEntity<>(shipRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/ships/{id}")
+    // example queries localhost:8080/ships/1
     public ResponseEntity getShip(@PathVariable Long id){
         return new ResponseEntity(shipRepository.findById(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/ships")
+    // example queries localhost:8080/ships
     public ResponseEntity postShip(@RequestBody Ship ship){
         shipRepository.save(ship);
         return new ResponseEntity(ship , HttpStatus.CREATED);
+    }
+
+    @GetMapping(value="/ships/pirates")
+    // example queries localhost:8080/ships/pirates?named=Maggie
+    public ResponseEntity<List<Ship>> findShipsThatHavePiratesNamedQueryString(@RequestParam(name = "named") String name){
+        return new ResponseEntity<>(shipRepository.findByPiratesFirstName(name), HttpStatus.OK);
     }
 }

@@ -16,22 +16,26 @@ public class PirateController {
     PirateRepository pirateRepository;
 
     @GetMapping(value = "/pirates")
+    // example queries localhost:8080/pirates
     public ResponseEntity <List<Pirate>> getAllPirates(){
         return new ResponseEntity<>(pirateRepository.findAll(), HttpStatus.OK) ;
     }
 
     @GetMapping(value = "/pirates/{id}")
+    // example queries localhost:8080/pirates/1
     public ResponseEntity  getPirate(@PathVariable Long id) {
         return new ResponseEntity(pirateRepository.findById(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/pirates")
+    // example queries localhost:8080/pirates
     public ResponseEntity postPirate(@RequestBody Pirate pirate){
         pirateRepository.save(pirate);
         return new ResponseEntity(pirate, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/pirates/{id}")
+    // example queries localhost:8080/pirates/1
     public ResponseEntity deletePirate(@PathVariable Long id) {
         // Try to get the pirate with the id passed in
         Optional<Pirate> pirateToDelete = pirateRepository.findById(id);
@@ -47,6 +51,7 @@ public class PirateController {
     }
 
     @PutMapping(value = "/pirates/{id}")
+    // example queries localhost:8080/pirates/1
     public ResponseEntity putPirate(@RequestBody Pirate pirate, @PathVariable Long id)
     {
         Optional<Pirate> pirateToUpdateOptional = pirateRepository.findById(id);

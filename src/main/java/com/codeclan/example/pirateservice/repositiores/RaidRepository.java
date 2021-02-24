@@ -9,6 +9,7 @@ public interface RaidRepository extends JpaRepository<Raid, Long> {
 
  List<Raid> findRaidByLocation(String location);
 
+ List<Raid> findByLootGreaterThan(int lootieSize);
 
 
 }
